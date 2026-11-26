@@ -7,7 +7,7 @@ import markdown
 SRC = pathlib.Path.home() / "agita-project/copy/ads-jan-2027/ad-copy.md"
 md = SRC.read_text()
 
-imgs = {"P1": "p1-for-etter", "P1b": "p1b-grumsete", "P3": "p3-elevarbeid"}
+imgs = {"P1": "p1-for-etter", "P2": "p2-grumsete", "P3": "p3-elevarbeid"}
 for key, stem in imgs.items():
     gallery = "".join(
         f'<a href="images/{stem}-{fmt}.jpg" target="_blank"><img class="ad" src="images/{stem}-{fmt}.jpg" alt="{key} {fmt}"></a>'
@@ -15,7 +15,7 @@ for key, stem in imgs.items():
     md = re.sub(rf"(## {key}:[^\n]*\n)", rf'\1\n<div class="gallery">{gallery}</div>\n\n', md)
 
 body = markdown.markdown(md, extensions=["tables"])
-sections = [("v1", "V1"), ("v2", "V2"), ("v3", "V3"), ("p1", "P1"), ("p1b", "P1b"), ("p3", "P3")]
+sections = [("v1", "V1"), ("v2", "V2"), ("v3", "V3"), ("p1", "P1"), ("p2", "P2"), ("p3", "P3")]
 for anchor, key in sections:
     body = body.replace(f"<h2>{key}:", f'<h2 id="{anchor}">{key}:', 1)
 nav = "".join(f'<a href="#{a}">{k}</a>' for a, k in sections)
